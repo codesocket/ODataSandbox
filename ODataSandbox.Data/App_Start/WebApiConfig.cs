@@ -1,7 +1,10 @@
-﻿using System;
+﻿using ODataSandbox.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.OData.Builder;
+using System.Web.OData.Extensions;
 
 namespace ODataSandbox.Data
 {
@@ -19,6 +22,13 @@ namespace ODataSandbox.Data
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            ODataModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Product>("Products");
+            config.MapODataServiceRoute(
+                routeName: "ODataRoute",
+                routePrefix: "odata",
+                model: builder.GetEdmModel());
         }
     }
 }

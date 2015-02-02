@@ -6,72 +6,73 @@ namespace ODataSandbox.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("HumanResources.Employee")]
     public partial class Employee
     {
         public Employee()
         {
-            EmployeeDepartmentHistories = new HashSet<EmployeeDepartmentHistory>();
-            EmployeePayHistories = new HashSet<EmployeePayHistory>();
-            JobCandidates = new HashSet<JobCandidate>();
-            PurchaseOrderHeaders = new HashSet<PurchaseOrderHeader>();
+            Employees1 = new HashSet<Employee>();
+            Orders = new HashSet<Order>();
+            Territories = new HashSet<Territory>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int BusinessEntityID { get; set; }
+        public int EmployeeID { get; set; }
 
         [Required]
+        [StringLength(20)]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string FirstName { get; set; }
+
+        [StringLength(30)]
+        public string Title { get; set; }
+
+        [StringLength(25)]
+        public string TitleOfCourtesy { get; set; }
+
+        public DateTimeOffset? BirthDate { get; set; }
+
+        public DateTimeOffset? HireDate { get; set; }
+
+        [StringLength(60)]
+        public string Address { get; set; }
+
         [StringLength(15)]
-        public string NationalIDNumber { get; set; }
+        public string City { get; set; }
 
-        [Required]
-        [StringLength(256)]
-        public string LoginID { get; set; }
+        [StringLength(15)]
+        public string Region { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public short? OrganizationLevel { get; set; }
+        [StringLength(10)]
+        public string PostalCode { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string JobTitle { get; set; }
+        [StringLength(15)]
+        public string Country { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime BirthDate { get; set; }
+        [StringLength(24)]
+        public string HomePhone { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        public string MaritalStatus { get; set; }
+        [StringLength(4)]
+        public string Extension { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        public string Gender { get; set; }
+        [Column(TypeName = "image")]
+        public byte[] Photo { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime HireDate { get; set; }
+        [Column(TypeName = "ntext")]
+        public string Notes { get; set; }
 
-        public bool SalariedFlag { get; set; }
+        public int? ReportsTo { get; set; }
 
-        public short VacationHours { get; set; }
+        [StringLength(255)]
+        public string PhotoPath { get; set; }
 
-        public short SickLeaveHours { get; set; }
+        public virtual ICollection<Employee> Employees1 { get; set; }
 
-        public bool CurrentFlag { get; set; }
+        public virtual Employee Employee1 { get; set; }
 
-        public Guid rowguid { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
-
-        public virtual Person Person { get; set; }
-
-        public virtual ICollection<EmployeeDepartmentHistory> EmployeeDepartmentHistories { get; set; }
-
-        public virtual ICollection<EmployeePayHistory> EmployeePayHistories { get; set; }
-
-        public virtual ICollection<JobCandidate> JobCandidates { get; set; }
-
-        public virtual ICollection<PurchaseOrderHeader> PurchaseOrderHeaders { get; set; }
-
-        public virtual SalesPerson SalesPerson { get; set; }
+        public virtual ICollection<Territory> Territories { get; set; }
     }
 }

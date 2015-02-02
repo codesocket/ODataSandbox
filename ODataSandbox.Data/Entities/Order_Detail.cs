@@ -6,24 +6,27 @@ namespace ODataSandbox.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Production.ProductListPriceHistory")]
-    public partial class ProductListPriceHistory
+    [Table("Order Details")]
+    public partial class Order_Detail
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ProductID { get; set; }
+        public int OrderID { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        public DateTime StartDate { get; set; }
-
-        public DateTime? EndDate { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ProductID { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal ListPrice { get; set; }
+        public decimal UnitPrice { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
+        public short Quantity { get; set; }
+
+        public float Discount { get; set; }
+
+        public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }
     }

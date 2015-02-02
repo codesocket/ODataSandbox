@@ -6,16 +6,14 @@ namespace ODataSandbox.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Customer
+    public partial class Supplier
     {
-        public Customer()
+        public Supplier()
         {
-            Orders = new HashSet<Order>();
-            CustomerDemographics = new HashSet<CustomerDemographic>();
+            Products = new HashSet<Product>();
         }
 
-        [StringLength(5)]
-        public string CustomerID { get; set; }
+        public int SupplierID { get; set; }
 
         [Required]
         [StringLength(40)]
@@ -48,8 +46,9 @@ namespace ODataSandbox.Data.Entities
         [StringLength(24)]
         public string Fax { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        [Column(TypeName = "ntext")]
+        public string HomePage { get; set; }
 
-        public virtual ICollection<CustomerDemographic> CustomerDemographics { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

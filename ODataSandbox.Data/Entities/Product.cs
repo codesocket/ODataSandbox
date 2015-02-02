@@ -6,123 +6,41 @@ namespace ODataSandbox.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Production.Product")]
     public partial class Product
     {
         public Product()
         {
-            BillOfMaterials = new HashSet<BillOfMaterial>();
-            BillOfMaterials1 = new HashSet<BillOfMaterial>();
-            ProductCostHistories = new HashSet<ProductCostHistory>();
-            ProductInventories = new HashSet<ProductInventory>();
-            ProductListPriceHistories = new HashSet<ProductListPriceHistory>();
-            ProductProductPhotoes = new HashSet<ProductProductPhoto>();
-            ProductReviews = new HashSet<ProductReview>();
-            ProductVendors = new HashSet<ProductVendor>();
-            PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
-            ShoppingCartItems = new HashSet<ShoppingCartItem>();
-            SpecialOfferProducts = new HashSet<SpecialOfferProduct>();
-            TransactionHistories = new HashSet<TransactionHistory>();
-            WorkOrders = new HashSet<WorkOrder>();
+            Order_Details = new HashSet<Order_Detail>();
         }
 
         public int ProductID { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        [StringLength(40)]
+        public string ProductName { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        public string ProductNumber { get; set; }
+        public int? SupplierID { get; set; }
 
-        public bool MakeFlag { get; set; }
+        public int? CategoryID { get; set; }
 
-        public bool FinishedGoodsFlag { get; set; }
-
-        [StringLength(15)]
-        public string Color { get; set; }
-
-        public short SafetyStockLevel { get; set; }
-
-        public short ReorderPoint { get; set; }
+        [StringLength(20)]
+        public string QuantityPerUnit { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal StandardCost { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal ListPrice { get; set; }
+        public short? UnitsInStock { get; set; }
 
-        [StringLength(5)]
-        public string Size { get; set; }
+        public short? UnitsOnOrder { get; set; }
 
-        [StringLength(3)]
-        public string SizeUnitMeasureCode { get; set; }
+        public short? ReorderLevel { get; set; }
 
-        [StringLength(3)]
-        public string WeightUnitMeasureCode { get; set; }
+        public bool Discontinued { get; set; }
 
-        public decimal? Weight { get; set; }
+        public virtual Category Category { get; set; }
 
-        public int DaysToManufacture { get; set; }
+        public virtual ICollection<Order_Detail> Order_Details { get; set; }
 
-        [StringLength(2)]
-        public string ProductLine { get; set; }
-
-        [StringLength(2)]
-        public string Class { get; set; }
-
-        [StringLength(2)]
-        public string Style { get; set; }
-
-        public int? ProductSubcategoryID { get; set; }
-
-        public int? ProductModelID { get; set; }
-
-        public DateTime SellStartDate { get; set; }
-
-        public DateTime? SellEndDate { get; set; }
-
-        public DateTime? DiscontinuedDate { get; set; }
-
-        public Guid rowguid { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
-        public virtual ICollection<BillOfMaterial> BillOfMaterials { get; set; }
-
-        public virtual ICollection<BillOfMaterial> BillOfMaterials1 { get; set; }
-
-        public virtual ProductModel ProductModel { get; set; }
-
-        public virtual ProductSubcategory ProductSubcategory { get; set; }
-
-        public virtual UnitMeasure UnitMeasure { get; set; }
-
-        public virtual UnitMeasure UnitMeasure1 { get; set; }
-
-        public virtual ICollection<ProductCostHistory> ProductCostHistories { get; set; }
-
-        public virtual ProductDocument ProductDocument { get; set; }
-
-        public virtual ICollection<ProductInventory> ProductInventories { get; set; }
-
-        public virtual ICollection<ProductListPriceHistory> ProductListPriceHistories { get; set; }
-
-        public virtual ICollection<ProductProductPhoto> ProductProductPhotoes { get; set; }
-
-        public virtual ICollection<ProductReview> ProductReviews { get; set; }
-
-        public virtual ICollection<ProductVendor> ProductVendors { get; set; }
-
-        public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
-
-        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
-
-        public virtual ICollection<SpecialOfferProduct> SpecialOfferProducts { get; set; }
-
-        public virtual ICollection<TransactionHistory> TransactionHistories { get; set; }
-
-        public virtual ICollection<WorkOrder> WorkOrders { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }
