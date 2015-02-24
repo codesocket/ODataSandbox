@@ -24,7 +24,11 @@ namespace ODataSandbox.Data
             );
 
             ODataModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<Employee>("Employees");
             builder.EntitySet<Product>("Products");
+            builder.EntitySet<Order_Detail>("Order_Details");
+            builder.EntitySet<Order>("Orders");
+
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",
                 routePrefix: "odata",
