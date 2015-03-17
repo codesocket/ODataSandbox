@@ -10,6 +10,7 @@ namespace ODataSandbox.Data.Entities
         public NorthwindEntities()
             : base("name=NorthwindEntities")
         {
+            Database.SetInitializer<NorthwindEntities>(null);
         }
 
         public virtual DbSet<Category> Categories { get; set; }
