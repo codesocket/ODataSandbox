@@ -99,7 +99,7 @@
     </Reference>
     <Reference Include="System.Web.OData, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.OData.5.5.0-beta-150316-Nightly\lib\net45\System.Web.OData.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.OData.5.5.0-beta-150322-Nightly\lib\net45\System.Web.OData.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -265,7 +265,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
