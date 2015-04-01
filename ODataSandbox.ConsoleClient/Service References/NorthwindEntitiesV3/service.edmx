@@ -1,0 +1,399 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="3.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="ODataSandbox.DataV3.Entities" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="EmployeeID" />
+        </Key>
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" />
+        <Property Name="TitleOfCourtesy" Type="Edm.String" />
+        <Property Name="BirthDate" Type="Edm.DateTimeOffset" />
+        <Property Name="HireDate" Type="Edm.DateTimeOffset" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="HomePhone" Type="Edm.String" />
+        <Property Name="Extension" Type="Edm.String" />
+        <Property Name="Photo" Type="Edm.Binary" />
+        <Property Name="Notes" Type="Edm.String" />
+        <Property Name="ReportsTo" Type="Edm.Int32" />
+        <Property Name="PhotoPath" Type="Edm.String" />
+        <NavigationProperty Name="Employees1" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Employees1_ODataSandbox_DataV3_Entities_Employee_Employees1Partner" ToRole="Employees1" FromRole="Employees1Partner" />
+        <NavigationProperty Name="Employee1" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Employee1_ODataSandbox_DataV3_Entities_Employee_Employee1Partner" ToRole="Employee1" FromRole="Employee1Partner" />
+        <NavigationProperty Name="Orders" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner" ToRole="Orders" FromRole="OrdersPartner" />
+        <NavigationProperty Name="Territories" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner" ToRole="Territories" FromRole="TerritoriesPartner" />
+      </EntityType>
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="SupplierID" Type="Edm.Int32" />
+        <Property Name="CategoryID" Type="Edm.Int32" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" />
+        <Property Name="UnitsInStock" Type="Edm.Int16" />
+        <Property Name="UnitsOnOrder" Type="Edm.Int16" />
+        <Property Name="ReorderLevel" Type="Edm.Int16" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="Category" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Category_ODataSandbox_DataV3_Entities_Category_CategoryPartner" ToRole="Category" FromRole="CategoryPartner" />
+        <NavigationProperty Name="Order_Details" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner" ToRole="Order_Details" FromRole="Order_DetailsPartner" />
+        <NavigationProperty Name="Supplier" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Supplier_ODataSandbox_DataV3_Entities_Supplier_SupplierPartner" ToRole="Supplier" FromRole="SupplierPartner" />
+      </EntityType>
+      <EntityType Name="Order_Detail">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Quantity" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <NavigationProperty Name="Order" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order__Detail_Order_ODataSandbox_DataV3_Entities_Order_OrderPartner" ToRole="Order" FromRole="OrderPartner" />
+        <NavigationProperty Name="Product" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order__Detail_Product_ODataSandbox_DataV3_Entities_Product_ProductPartner" ToRole="Product" FromRole="ProductPartner" />
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
+        <Property Name="EmployeeID" Type="Edm.Int32" />
+        <Property Name="OrderDate" Type="Edm.DateTimeOffset" />
+        <Property Name="RequiredDate" Type="Edm.DateTimeOffset" />
+        <Property Name="ShippedDate" Type="Edm.DateTimeOffset" />
+        <Property Name="ShipVia" Type="Edm.Int32" />
+        <Property Name="Freight" Type="Edm.Decimal" />
+        <Property Name="ShipName" Type="Edm.String" />
+        <Property Name="ShipAddress" Type="Edm.String" />
+        <Property Name="ShipCity" Type="Edm.String" />
+        <Property Name="ShipRegion" Type="Edm.String" />
+        <Property Name="ShipPostalCode" Type="Edm.String" />
+        <Property Name="ShipCountry" Type="Edm.String" />
+        <NavigationProperty Name="Customer" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Customer_ODataSandbox_DataV3_Entities_Customer_CustomerPartner" ToRole="Customer" FromRole="CustomerPartner" />
+        <NavigationProperty Name="Employee" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Employee_ODataSandbox_DataV3_Entities_Employee_EmployeePartner" ToRole="Employee" FromRole="EmployeePartner" />
+        <NavigationProperty Name="Order_Details" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner" ToRole="Order_Details" FromRole="Order_DetailsPartner" />
+        <NavigationProperty Name="Shipper" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Shipper_ODataSandbox_DataV3_Entities_Shipper_ShipperPartner" ToRole="Shipper" FromRole="ShipperPartner" />
+      </EntityType>
+      <EntityType Name="Category">
+        <Key>
+          <PropertyRef Name="CategoryID" />
+        </Key>
+        <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Picture" Type="Edm.Binary" />
+        <NavigationProperty Name="Products" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Category_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner" ToRole="Products" FromRole="ProductsPartner" />
+      </EntityType>
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustomerID" />
+        </Key>
+        <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Customer_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner" ToRole="Orders" FromRole="OrdersPartner" />
+        <NavigationProperty Name="CustomerDemographics" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Customer_CustomerDemographics_ODataSandbox_DataV3_Entities_CustomerDemographic_CustomerDemographicsPartner" ToRole="CustomerDemographics" FromRole="CustomerDemographicsPartner" />
+      </EntityType>
+      <EntityType Name="CustomerDemographic">
+        <Key>
+          <PropertyRef Name="CustomerTypeID" />
+        </Key>
+        <Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" />
+        <Property Name="CustomerDesc" Type="Edm.String" />
+        <NavigationProperty Name="Customers" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_CustomerDemographic_Customers_ODataSandbox_DataV3_Entities_Customer_CustomersPartner" ToRole="Customers" FromRole="CustomersPartner" />
+      </EntityType>
+      <EntityType Name="Region">
+        <Key>
+          <PropertyRef Name="RegionID" />
+        </Key>
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="RegionDescription" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Territories" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Region_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner" ToRole="Territories" FromRole="TerritoriesPartner" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="SupplierID" />
+        </Key>
+        <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="HomePage" Type="Edm.String" />
+        <NavigationProperty Name="Products" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Supplier_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner" ToRole="Products" FromRole="ProductsPartner" />
+      </EntityType>
+      <EntityType Name="Territory">
+        <Key>
+          <PropertyRef Name="TerritoryID" />
+        </Key>
+        <Property Name="TerritoryID" Type="Edm.String" Nullable="false" />
+        <Property Name="TerritoryDescription" Type="Edm.String" Nullable="false" />
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="Region" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Territory_Region_ODataSandbox_DataV3_Entities_Region_RegionPartner" ToRole="Region" FromRole="RegionPartner" />
+        <NavigationProperty Name="Employees" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Territory_Employees_ODataSandbox_DataV3_Entities_Employee_EmployeesPartner" ToRole="Employees" FromRole="EmployeesPartner" />
+      </EntityType>
+      <EntityType Name="Shipper">
+        <Key>
+          <PropertyRef Name="ShipperID" />
+        </Key>
+        <Property Name="ShipperID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="Phone" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Relationship="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Shipper_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner" ToRole="Orders" FromRole="OrdersPartner" />
+      </EntityType>
+      <Association Name="ODataSandbox_DataV3_Entities_Employee_Employees1_ODataSandbox_DataV3_Entities_Employee_Employees1Partner">
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employees1" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employees1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Employee_Employee1_ODataSandbox_DataV3_Entities_Employee_Employee1Partner">
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employee1" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employee1Partner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Employee1">
+            <PropertyRef Name="EmployeeID" />
+          </Principal>
+          <Dependent Role="Employee1Partner">
+            <PropertyRef Name="EmployeeID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Employee_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="Orders" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="OrdersPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Employee_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Territory" Role="Territories" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="TerritoriesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Product_Category_ODataSandbox_DataV3_Entities_Category_CategoryPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Category" Role="Category" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="CategoryPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Product_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order_Detail" Role="Order_Details" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="Order_DetailsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Product_Supplier_ODataSandbox_DataV3_Entities_Supplier_SupplierPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Supplier" Role="Supplier" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="SupplierPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order__Detail_Order_ODataSandbox_DataV3_Entities_Order_OrderPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="Order" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Order_Detail" Role="OrderPartner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Order">
+            <PropertyRef Name="OrderID" />
+          </Principal>
+          <Dependent Role="OrderPartner">
+            <PropertyRef Name="OrderID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order__Detail_Product_ODataSandbox_DataV3_Entities_Product_ProductPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="Product" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Order_Detail" Role="ProductPartner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Product">
+            <PropertyRef Name="ProductID" />
+          </Principal>
+          <Dependent Role="ProductPartner">
+            <PropertyRef Name="ProductID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order_Customer_ODataSandbox_DataV3_Entities_Customer_CustomerPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Customer" Role="Customer" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="CustomerPartner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Customer">
+            <PropertyRef Name="CustomerID" />
+          </Principal>
+          <Dependent Role="CustomerPartner">
+            <PropertyRef Name="CustomerID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order_Employee_ODataSandbox_DataV3_Entities_Employee_EmployeePartner">
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employee" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="EmployeePartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order_Detail" Role="Order_Details" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="Order_DetailsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Order_Shipper_ODataSandbox_DataV3_Entities_Shipper_ShipperPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Shipper" Role="Shipper" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="ShipperPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Category_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="Products" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Category" Role="ProductsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Customer_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="Orders" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Customer" Role="OrdersPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Customer_CustomerDemographics_ODataSandbox_DataV3_Entities_CustomerDemographic_CustomerDemographicsPartner">
+        <End Type="ODataSandbox.DataV3.Entities.CustomerDemographic" Role="CustomerDemographics" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Customer" Role="CustomerDemographicsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_CustomerDemographic_Customers_ODataSandbox_DataV3_Entities_Customer_CustomersPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Customer" Role="Customers" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.CustomerDemographic" Role="CustomersPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Region_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Territory" Role="Territories" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Region" Role="TerritoriesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Supplier_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Product" Role="Products" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Supplier" Role="ProductsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Territory_Region_ODataSandbox_DataV3_Entities_Region_RegionPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Region" Role="Region" Multiplicity="0..1" />
+        <End Type="ODataSandbox.DataV3.Entities.Territory" Role="RegionPartner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Region">
+            <PropertyRef Name="RegionID" />
+          </Principal>
+          <Dependent Role="RegionPartner">
+            <PropertyRef Name="RegionID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Territory_Employees_ODataSandbox_DataV3_Entities_Employee_EmployeesPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employees" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Territory" Role="EmployeesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ODataSandbox_DataV3_Entities_Shipper_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+        <End Type="ODataSandbox.DataV3.Entities.Order" Role="Orders" Multiplicity="*" />
+        <End Type="ODataSandbox.DataV3.Entities.Shipper" Role="OrdersPartner" Multiplicity="0..1" />
+      </Association>
+    </Schema>
+    <Schema Namespace="Default" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityContainer Name="NorthwindEntities" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Employees" EntityType="ODataSandbox.DataV3.Entities.Employee" />
+        <EntitySet Name="Products" EntityType="ODataSandbox.DataV3.Entities.Product" />
+        <EntitySet Name="Order_Details" EntityType="ODataSandbox.DataV3.Entities.Order_Detail" />
+        <EntitySet Name="Orders" EntityType="ODataSandbox.DataV3.Entities.Order" />
+        <EntitySet Name="Categories" EntityType="ODataSandbox.DataV3.Entities.Category" />
+        <EntitySet Name="Cutromers" EntityType="ODataSandbox.DataV3.Entities.Customer" />
+        <EntitySet Name="CustomerDemographics" EntityType="ODataSandbox.DataV3.Entities.CustomerDemographic" />
+        <EntitySet Name="Regions" EntityType="ODataSandbox.DataV3.Entities.Region" />
+        <EntitySet Name="Suppliers" EntityType="ODataSandbox.DataV3.Entities.Supplier" />
+        <EntitySet Name="Territories" EntityType="ODataSandbox.DataV3.Entities.Territory" />
+        <EntitySet Name="Shippers" EntityType="ODataSandbox.DataV3.Entities.Shipper" />
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Employee_Employees1_ODataSandbox_DataV3_Entities_Employee_Employees1PartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Employees1_ODataSandbox_DataV3_Entities_Employee_Employees1Partner">
+          <End Role="Employees1Partner" EntitySet="Employees" />
+          <End Role="Employees1" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Employee_Employee1_ODataSandbox_DataV3_Entities_Employee_Employee1PartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Employee1_ODataSandbox_DataV3_Entities_Employee_Employee1Partner">
+          <End Role="Employee1Partner" EntitySet="Employees" />
+          <End Role="Employee1" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Employee_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+          <End Role="OrdersPartner" EntitySet="Employees" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Employee_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Employee_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner">
+          <End Role="TerritoriesPartner" EntitySet="Employees" />
+          <End Role="Territories" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Product_Category_ODataSandbox_DataV3_Entities_Category_CategoryPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Category_ODataSandbox_DataV3_Entities_Category_CategoryPartner">
+          <End Role="CategoryPartner" EntitySet="Products" />
+          <End Role="Category" EntitySet="Categories" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Product_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner">
+          <End Role="Order_DetailsPartner" EntitySet="Products" />
+          <End Role="Order_Details" EntitySet="Order_Details" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Product_Supplier_ODataSandbox_DataV3_Entities_Supplier_SupplierPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Product_Supplier_ODataSandbox_DataV3_Entities_Supplier_SupplierPartner">
+          <End Role="SupplierPartner" EntitySet="Products" />
+          <End Role="Supplier" EntitySet="Suppliers" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order__Detail_Order_ODataSandbox_DataV3_Entities_Order_OrderPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order__Detail_Order_ODataSandbox_DataV3_Entities_Order_OrderPartner">
+          <End Role="OrderPartner" EntitySet="Order_Details" />
+          <End Role="Order" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order__Detail_Product_ODataSandbox_DataV3_Entities_Product_ProductPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order__Detail_Product_ODataSandbox_DataV3_Entities_Product_ProductPartner">
+          <End Role="ProductPartner" EntitySet="Order_Details" />
+          <End Role="Product" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order_Customer_ODataSandbox_DataV3_Entities_Customer_CustomerPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Customer_ODataSandbox_DataV3_Entities_Customer_CustomerPartner">
+          <End Role="CustomerPartner" EntitySet="Orders" />
+          <End Role="Customer" EntitySet="Cutromers" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order_Employee_ODataSandbox_DataV3_Entities_Employee_EmployeePartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Employee_ODataSandbox_DataV3_Entities_Employee_EmployeePartner">
+          <End Role="EmployeePartner" EntitySet="Orders" />
+          <End Role="Employee" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner">
+          <End Role="Order_DetailsPartner" EntitySet="Orders" />
+          <End Role="Order_Details" EntitySet="Order_Details" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Order_Shipper_ODataSandbox_DataV3_Entities_Shipper_ShipperPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Order_Shipper_ODataSandbox_DataV3_Entities_Shipper_ShipperPartner">
+          <End Role="ShipperPartner" EntitySet="Orders" />
+          <End Role="Shipper" EntitySet="Shippers" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Category_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Category_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner">
+          <End Role="ProductsPartner" EntitySet="Categories" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Customer_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Customer_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+          <End Role="OrdersPartner" EntitySet="Cutromers" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Customer_CustomerDemographics_ODataSandbox_DataV3_Entities_CustomerDemographic_CustomerDemographicsPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Customer_CustomerDemographics_ODataSandbox_DataV3_Entities_CustomerDemographic_CustomerDemographicsPartner">
+          <End Role="CustomerDemographicsPartner" EntitySet="Cutromers" />
+          <End Role="CustomerDemographics" EntitySet="CustomerDemographics" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_CustomerDemographic_Customers_ODataSandbox_DataV3_Entities_Customer_CustomersPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_CustomerDemographic_Customers_ODataSandbox_DataV3_Entities_Customer_CustomersPartner">
+          <End Role="CustomersPartner" EntitySet="CustomerDemographics" />
+          <End Role="Customers" EntitySet="Cutromers" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Region_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Region_Territories_ODataSandbox_DataV3_Entities_Territory_TerritoriesPartner">
+          <End Role="TerritoriesPartner" EntitySet="Regions" />
+          <End Role="Territories" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Supplier_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Supplier_Products_ODataSandbox_DataV3_Entities_Product_ProductsPartner">
+          <End Role="ProductsPartner" EntitySet="Suppliers" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Territory_Region_ODataSandbox_DataV3_Entities_Region_RegionPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Territory_Region_ODataSandbox_DataV3_Entities_Region_RegionPartner">
+          <End Role="RegionPartner" EntitySet="Territories" />
+          <End Role="Region" EntitySet="Regions" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Territory_Employees_ODataSandbox_DataV3_Entities_Employee_EmployeesPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Territory_Employees_ODataSandbox_DataV3_Entities_Employee_EmployeesPartner">
+          <End Role="EmployeesPartner" EntitySet="Territories" />
+          <End Role="Employees" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ODataSandbox_DataV3_Entities_Shipper_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartnerSet" Association="ODataSandbox.DataV3.Entities.ODataSandbox_DataV3_Entities_Shipper_Orders_ODataSandbox_DataV3_Entities_Order_OrdersPartner">
+          <End Role="OrdersPartner" EntitySet="Shippers" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
