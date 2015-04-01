@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 3/31/2015 11:41:24 PM
+// Generation date: 3/31/2015 11:46:57 PM
 namespace ODataSandbox.ConsoleClient.ODataSandbox.Data.Entities
 {
     /// <summary>
@@ -3926,16 +3926,16 @@ namespace ODataSandbox.ConsoleClient.ODataSandbox.Data.Entities
 namespace ODataSandbox.ConsoleClient.Default
 {
     /// <summary>
-    /// There are no comments for Container in the schema.
+    /// There are no comments for NorthwindEntities in the schema.
     /// </summary>
-    [global::Microsoft.OData.Client.OriginalNameAttribute("Container")]
-    public partial class Container : global::Microsoft.OData.Client.DataServiceContext
+    [global::Microsoft.OData.Client.OriginalNameAttribute("NorthwindEntities")]
+    public partial class NorthwindEntities : global::Microsoft.OData.Client.DataServiceContext
     {
         /// <summary>
-        /// Initialize a new Container object.
+        /// Initialize a new NorthwindEntities object.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        public Container(global::System.Uri serviceRoot) : 
+        public NorthwindEntities(global::System.Uri serviceRoot) : 
                 base(serviceRoot, global::Microsoft.OData.Client.ODataProtocolVersion.V4)
         {
             this.ResolveName = new global::System.Func<global::System.Type, string>(this.ResolveNameFromType);
@@ -4461,7 +4461,7 @@ namespace ODataSandbox.ConsoleClient.Default
       </EntityType>
     </Schema>
     <Schema Namespace=""Default"" xmlns=""http://docs.oasis-open.org/odata/ns/edm"">
-      <EntityContainer Name=""Container"">
+      <EntityContainer Name=""NorthwindEntities"">
         <EntitySet Name=""Employees"" EntityType=""ODataSandbox.Data.Entities.Employee"">
           <NavigationPropertyBinding Path=""Employees1"" Target=""Employees"" />
           <NavigationPropertyBinding Path=""Employee1"" Target=""Employees"" />

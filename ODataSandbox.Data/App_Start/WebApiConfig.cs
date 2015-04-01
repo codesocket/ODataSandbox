@@ -37,15 +37,17 @@ namespace ODataSandbox.Data
 
             config.Services.Replace(typeof(IContentNegotiator), new JsonContentNegotiator(jsonFormatter));
             */
-             
+
             config.Formatters.JsonFormatter.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
-            };            
+            };
 
             ODataModelBuilder builder = new ODataConventionModelBuilder();
+
+            builder.ContainerName = "NorthwindEntities";
             builder.EntitySet<Employee>("Employees");
             builder.EntitySet<Product>("Products");
             builder.EntitySet<Order_Detail>("Order_Details");
@@ -61,7 +63,7 @@ namespace ODataSandbox.Data
             builder.EntityType<Product>().Function("fff").ReturnsFromEntitySet<Product>("Products");
             builder.EntityType<Customer>()
                 .Action("").re
-            */  
+            */
 
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",
@@ -76,7 +78,7 @@ namespace ODataSandbox.Data
 
         public JsonContentNegotiator(JsonMediaTypeFormatter formatter)
         {
-            _jsonFormatter = formatter;            
+            _jsonFormatter = formatter;
         }
 
         public ContentNegotiationResult Negotiate(Type type, HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
