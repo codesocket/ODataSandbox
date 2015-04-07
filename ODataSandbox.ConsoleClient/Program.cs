@@ -16,14 +16,10 @@ namespace ODataSandbox.ConsoleClient
             var containerV3 = new NorthwindEntitiesV3.NorthwindEntities(new Uri("http://localhost:52799/odata"));
             var containerV4 = new Default.NorthwindEntities(new Uri("http://localhost:53372/odata/"));
 
-            var product = new Product();
-
-            var query = new DataServiceQuerySingle<Product>(containerV4, "");
-
-            //containerV4.Products.ByKey
+            containerV4.Products.ByKey(1).RateProduct(10, DateTimeOffset.UtcNow).Execute();
 
             var productV3 = containerV3.Products.First();
-            var productV4 = containerV4.Orders.OrderBy(p => p.OrderDate).First();
+            var productV4 = containerV4.Orders.OrderBy(p => p.OrderDate.Value).First();
         }
     }
 }

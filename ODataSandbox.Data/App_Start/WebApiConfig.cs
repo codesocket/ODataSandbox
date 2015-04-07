@@ -59,11 +59,17 @@ namespace ODataSandbox.Data
             builder.EntitySet<Supplier>("Suppliers");
             builder.EntitySet<Territory>("Territories");
             builder.EntitySet<Shipper>("Shippers");
-            /*
-            builder.EntityType<Product>().Function("fff").ReturnsFromEntitySet<Product>("Products");
-            builder.EntityType<Customer>()
-                .Action("").re
-            */
+
+            var actionConfig = builder.EntityType<Product>().Action("RateProduct");
+            actionConfig.Parameter<int>("rating");
+            actionConfig.Parameter<DateTime>("dateRated");
+
+
+            //builder.EntityType<Product>().Function("RateProduct").ReturnsEntityViaEntitySetPath<Product>("http://localhost:53372/odata/Products");
+            builder.EntityType<Product>().Function("DiscountProduct").ReturnsCollection<Product>();
+            builder.EntityType<Product>().Function("RetireProduct").ReturnsFromEntitySet<Product>("Products");
+            builder.Function("RateProduct").Returns<Product>();
+            builder.EntityType<Product>().Collection.Function("RateProduct").Returns<Product>();
 
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",

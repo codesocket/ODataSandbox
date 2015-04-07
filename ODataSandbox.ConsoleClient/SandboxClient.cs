@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 4/3/2015 12:13:29 AM
+// Generation date: 4/7/2015 12:23:51 AM
 namespace ODataSandbox.Data.Entities
 {
     /// <summary>
@@ -4461,6 +4461,26 @@ namespace Default
       </EntityType>
     </Schema>
     <Schema Namespace=""Default"" xmlns=""http://docs.oasis-open.org/odata/ns/edm"">
+      <Action Name=""RateProduct"" IsBound=""true"">
+        <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
+        <Parameter Name=""rating"" Type=""Edm.Int32"" Nullable=""false"" />
+        <Parameter Name=""dateRated"" Type=""Edm.DateTimeOffset"" Nullable=""false"" />
+      </Action>
+      <Function Name=""DiscountProduct"" IsBound=""true"">
+        <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
+        <ReturnType Type=""Collection(ODataSandbox.Data.Entities.Product)"" />
+      </Function>
+      <Function Name=""RetireProduct"" IsBound=""true"">
+        <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
+        <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
+      </Function>
+      <Function Name=""RateProduct"">
+        <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
+      </Function>
+      <Function Name=""RateProduct"" IsBound=""true"">
+        <Parameter Name=""bindingParameter"" Type=""Collection(ODataSandbox.Data.Entities.Product)"" />
+        <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
+      </Function>
       <EntityContainer Name=""NorthwindEntities"">
         <EntitySet Name=""Employees"" EntityType=""ODataSandbox.Data.Entities.Employee"">
           <NavigationPropertyBinding Path=""Employees1"" Target=""Employees"" />
@@ -4506,6 +4526,7 @@ namespace Default
         <EntitySet Name=""Shippers"" EntityType=""ODataSandbox.Data.Entities.Shipper"">
           <NavigationPropertyBinding Path=""Orders"" Target=""Orders"" />
         </EntitySet>
+        <FunctionImport Name=""RateProduct"" Function=""Default.RateProduct"" IncludeInServiceDocument=""true"" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
@@ -4533,6 +4554,73 @@ namespace Default
             {
                 return global::System.Xml.XmlReader.Create(new global::System.IO.StringReader(edmxToParse));
             }
+        }
+        /// <summary>
+        /// There are no comments for RateProduct in the schema.
+        /// </summary>
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
+        public global::ODataSandbox.Data.Entities.ProductSingle RateProduct()
+        {
+            return new global::ODataSandbox.Data.Entities.ProductSingle(this.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("", "RateProduct", false));
+        }
+    }
+    /// <summary>
+    /// Class containing all extension methods
+    /// </summary>
+    public static class ExtensionMethods
+    {
+        /// <summary>
+        /// There are no comments for DiscountProduct in the schema.
+        /// </summary>
+        [global::Microsoft.OData.Client.OriginalNameAttribute("DiscountProduct")]
+        public static global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Product> DiscountProduct(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source)
+        {
+            if (!source.IsComposable)
+            {
+                throw new global::System.NotSupportedException("The previous function is not composable.");
+            }
+
+            return source.CreateFunctionQuery<global::ODataSandbox.Data.Entities.Product>("Default.DiscountProduct", false);
+        }
+        /// <summary>
+        /// There are no comments for RetireProduct in the schema.
+        /// </summary>
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RetireProduct")]
+        public static global::ODataSandbox.Data.Entities.ProductSingle RetireProduct(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source)
+        {
+            if (!source.IsComposable)
+            {
+                throw new global::System.NotSupportedException("The previous function is not composable.");
+            }
+
+            return new global::ODataSandbox.Data.Entities.ProductSingle(source.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("Default.RetireProduct", false));
+        }
+        /// <summary>
+        /// There are no comments for RateProduct in the schema.
+        /// </summary>
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
+        public static global::ODataSandbox.Data.Entities.ProductSingle RateProduct(this global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Product> source)
+        {
+            if (!source.IsComposable)
+            {
+                throw new global::System.NotSupportedException("The previous function is not composable.");
+            }
+
+            return new global::ODataSandbox.Data.Entities.ProductSingle(source.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("Default.RateProduct", false));
+        }
+        /// <summary>
+        /// There are no comments for RateProduct in the schema.
+        /// </summary>
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
+        public static global::Microsoft.OData.Client.DataServiceActionQuery RateProduct(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source, int rating, global::System.DateTimeOffset dateRated)
+        {
+            if (!source.IsComposable)
+            {
+                throw new global::System.NotSupportedException("The previous function is not composable.");
+            }
+
+            return new global::Microsoft.OData.Client.DataServiceActionQuery(source.Context, source.AppendRequestUri("Default.RateProduct"), new global::Microsoft.OData.Client.BodyOperationParameter("rating", rating),
+                    new global::Microsoft.OData.Client.BodyOperationParameter("dateRated", dateRated));
         }
     }
 }
