@@ -69,7 +69,7 @@ namespace ODataSandbox.Data
             builder.EntityType<Product>().Function("DiscountProduct").ReturnsCollection<Product>();
             builder.EntityType<Product>().Function("RetireProduct").ReturnsFromEntitySet<Product>("Products");
             builder.Function("RateProduct").Returns<Product>();
-            builder.EntityType<Product>().Collection.Function("RateProduct").Returns<Product>();
+            builder.EntityType<Product>().Function("ExpensiveProducts").ReturnsCollection<Product>();
 
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 4/7/2015 12:23:51 AM
+// Generation date: 4/7/2015 1:01:43 AM
 namespace ODataSandbox.Data.Entities
 {
     /// <summary>
@@ -4477,9 +4477,9 @@ namespace Default
       <Function Name=""RateProduct"">
         <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
       </Function>
-      <Function Name=""RateProduct"" IsBound=""true"">
-        <Parameter Name=""bindingParameter"" Type=""Collection(ODataSandbox.Data.Entities.Product)"" />
-        <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
+      <Function Name=""ExpensiveProducts"" IsBound=""true"">
+        <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
+        <ReturnType Type=""Collection(ODataSandbox.Data.Entities.Product)"" />
       </Function>
       <EntityContainer Name=""NorthwindEntities"">
         <EntitySet Name=""Employees"" EntityType=""ODataSandbox.Data.Entities.Employee"">
@@ -4596,17 +4596,17 @@ namespace Default
             return new global::ODataSandbox.Data.Entities.ProductSingle(source.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("Default.RetireProduct", false));
         }
         /// <summary>
-        /// There are no comments for RateProduct in the schema.
+        /// There are no comments for ExpensiveProducts in the schema.
         /// </summary>
-        [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
-        public static global::ODataSandbox.Data.Entities.ProductSingle RateProduct(this global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Product> source)
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ExpensiveProducts")]
+        public static global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Product> ExpensiveProducts(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source)
         {
             if (!source.IsComposable)
             {
                 throw new global::System.NotSupportedException("The previous function is not composable.");
             }
 
-            return new global::ODataSandbox.Data.Entities.ProductSingle(source.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("Default.RateProduct", false));
+            return source.CreateFunctionQuery<global::ODataSandbox.Data.Entities.Product>("Default.ExpensiveProducts", false);
         }
         /// <summary>
         /// There are no comments for RateProduct in the schema.
