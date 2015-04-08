@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.OData;
+using System.Web.OData.Batch;
 
 namespace ODataSandbox.Data.Controllers
 {
@@ -25,6 +26,8 @@ namespace ODataSandbox.Data.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
+
+            this.Request.GetODataContentId();
 
             return Ok(entity);
         }

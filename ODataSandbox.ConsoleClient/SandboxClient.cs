@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 4/7/2015 1:01:43 AM
+// Generation date: 4/7/2015 6:37:54 PM
 namespace ODataSandbox.Data.Entities
 {
     /// <summary>
@@ -4083,23 +4083,23 @@ namespace Default
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
         private global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Category> _Categories;
         /// <summary>
-        /// There are no comments for Cutromers in the schema.
+        /// There are no comments for Customers in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Cutromers")]
-        public global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Customer> Cutromers
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Customers")]
+        public global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Customer> Customers
         {
             get
             {
-                if ((this._Cutromers == null))
+                if ((this._Customers == null))
                 {
-                    this._Cutromers = base.CreateQuery<global::ODataSandbox.Data.Entities.Customer>("Cutromers");
+                    this._Customers = base.CreateQuery<global::ODataSandbox.Data.Entities.Customer>("Customers");
                 }
-                return this._Cutromers;
+                return this._Customers;
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Customer> _Cutromers;
+        private global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Customer> _Customers;
         /// <summary>
         /// There are no comments for CustomerDemographics in the schema.
         /// </summary>
@@ -4231,12 +4231,12 @@ namespace Default
             base.AddObject("Categories", category);
         }
         /// <summary>
-        /// There are no comments for Cutromers in the schema.
+        /// There are no comments for Customers in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        public void AddToCutromers(global::ODataSandbox.Data.Entities.Customer customer)
+        public void AddToCustomers(global::ODataSandbox.Data.Entities.Customer customer)
         {
-            base.AddObject("Cutromers", customer);
+            base.AddObject("Customers", customer);
         }
         /// <summary>
         /// There are no comments for CustomerDemographics in the schema.
@@ -4465,6 +4465,7 @@ namespace Default
         <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
         <Parameter Name=""rating"" Type=""Edm.Int32"" Nullable=""false"" />
         <Parameter Name=""dateRated"" Type=""Edm.DateTimeOffset"" Nullable=""false"" />
+        <ReturnType Type=""ODataSandbox.Data.Entities.Customer"" />
       </Action>
       <Function Name=""DiscountProduct"" IsBound=""true"">
         <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
@@ -4498,7 +4499,7 @@ namespace Default
           <NavigationPropertyBinding Path=""Product"" Target=""Products"" />
         </EntitySet>
         <EntitySet Name=""Orders"" EntityType=""ODataSandbox.Data.Entities.Order"">
-          <NavigationPropertyBinding Path=""Customer"" Target=""Cutromers"" />
+          <NavigationPropertyBinding Path=""Customer"" Target=""Customers"" />
           <NavigationPropertyBinding Path=""Employee"" Target=""Employees"" />
           <NavigationPropertyBinding Path=""Order_Details"" Target=""Order_Details"" />
           <NavigationPropertyBinding Path=""Shipper"" Target=""Shippers"" />
@@ -4506,12 +4507,12 @@ namespace Default
         <EntitySet Name=""Categories"" EntityType=""ODataSandbox.Data.Entities.Category"">
           <NavigationPropertyBinding Path=""Products"" Target=""Products"" />
         </EntitySet>
-        <EntitySet Name=""Cutromers"" EntityType=""ODataSandbox.Data.Entities.Customer"">
+        <EntitySet Name=""Customers"" EntityType=""ODataSandbox.Data.Entities.Customer"">
           <NavigationPropertyBinding Path=""Orders"" Target=""Orders"" />
           <NavigationPropertyBinding Path=""CustomerDemographics"" Target=""CustomerDemographics"" />
         </EntitySet>
         <EntitySet Name=""CustomerDemographics"" EntityType=""ODataSandbox.Data.Entities.CustomerDemographic"">
-          <NavigationPropertyBinding Path=""Customers"" Target=""Cutromers"" />
+          <NavigationPropertyBinding Path=""Customers"" Target=""Customers"" />
         </EntitySet>
         <EntitySet Name=""Regions"" EntityType=""ODataSandbox.Data.Entities.Region"">
           <NavigationPropertyBinding Path=""Territories"" Target=""Territories"" />
@@ -4612,14 +4613,14 @@ namespace Default
         /// There are no comments for RateProduct in the schema.
         /// </summary>
         [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
-        public static global::Microsoft.OData.Client.DataServiceActionQuery RateProduct(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source, int rating, global::System.DateTimeOffset dateRated)
+        public static global::Microsoft.OData.Client.DataServiceActionQuerySingle<global::ODataSandbox.Data.Entities.Customer> RateProduct(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source, int rating, global::System.DateTimeOffset dateRated)
         {
             if (!source.IsComposable)
             {
                 throw new global::System.NotSupportedException("The previous function is not composable.");
             }
 
-            return new global::Microsoft.OData.Client.DataServiceActionQuery(source.Context, source.AppendRequestUri("Default.RateProduct"), new global::Microsoft.OData.Client.BodyOperationParameter("rating", rating),
+            return new global::Microsoft.OData.Client.DataServiceActionQuerySingle<global::ODataSandbox.Data.Entities.Customer>(source.Context, source.AppendRequestUri("Default.RateProduct"), new global::Microsoft.OData.Client.BodyOperationParameter("rating", rating),
                     new global::Microsoft.OData.Client.BodyOperationParameter("dateRated", dateRated));
         }
     }

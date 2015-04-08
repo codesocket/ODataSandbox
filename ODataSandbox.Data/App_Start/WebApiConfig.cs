@@ -26,6 +26,8 @@ namespace ODataSandbox.Data
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //config.SetTimeZoneInfo(
+
             /*
             var jsonFormatter = new JsonMediaTypeFormatter();
             jsonFormatter.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings
@@ -53,7 +55,7 @@ namespace ODataSandbox.Data
             builder.EntitySet<Order_Detail>("Order_Details");
             builder.EntitySet<Order>("Orders");
             builder.EntitySet<Category>("Categories");
-            builder.EntitySet<Customer>("Cutromers");
+            builder.EntitySet<Customer>("Customers");
             builder.EntitySet<CustomerDemographic>("CustomerDemographics");
             builder.EntitySet<Region>("Regions");
             builder.EntitySet<Supplier>("Suppliers");
@@ -63,18 +65,17 @@ namespace ODataSandbox.Data
             var actionConfig = builder.EntityType<Product>().Action("RateProduct");
             actionConfig.Parameter<int>("rating");
             actionConfig.Parameter<DateTime>("dateRated");
+            actionConfig.ReturnsFromEntitySet<Customer>("Customers");
 
-
-            //builder.EntityType<Product>().Function("RateProduct").ReturnsEntityViaEntitySetPath<Product>("http://localhost:53372/odata/Products");
             builder.EntityType<Product>().Function("DiscountProduct").ReturnsCollection<Product>();
-            builder.EntityType<Product>().Function("RetireProduct").ReturnsFromEntitySet<Product>("Products");
-            builder.Function("RateProduct").Returns<Product>();
-            builder.EntityType<Product>().Function("ExpensiveProducts").ReturnsCollection<Product>();
+            builder.EntityType<Product>().Function("RetireProduct").Returns<Product>();
+            builder.EntityType<Product>().Function("ExpensiveProducts").Returns<Customer>();
 
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",
                 routePrefix: "odata",
-                model: builder.GetEdmModel());
+                model: builder.GetEdmModel(),
+                batchHandler: new AtomicODataBatchHandler(GlobalConfiguration.DefaultServer));
         }
     }
 

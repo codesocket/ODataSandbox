@@ -14,15 +14,26 @@ namespace ODataSandbox.ConsoleClient
     {
         static void Main(string[] args)
         {
-            var containerV3 = new NorthwindEntitiesV3.NorthwindEntities(new Uri("http://localhost:52799/odata"));
-            var containerV4 = new Default.NorthwindEntities(new Uri("http://localhost:53372/odata/"));
+            //var containerV3 = new NorthwindEntitiesV3.NorthwindEntities(new Uri("http://localhost:52799/odata"));
+            var containerV4 = new Default.NorthwindEntities(new Uri("http://localhost.fiddler:53372/odata/"));
 
-            containerV4.Products.ByKey(1).RateProduct(10, DateTimeOffset.UtcNow).Execute();
+            var product = new Product();
+            var category = new Category();
 
-            containerV4.CreateQuery<Product>("figure-it-out").ByKey(1).ExpensiveProducts().ExecuteAsync();
+            product.ProductName = "Abdul Product";
+            category.CategoryName = "Abdul Category";
 
-            var productV3 = containerV3.Products.First();
-            var productV4 = containerV4.Orders.OrderBy(p => p.OrderDate.Value).First();
+            containerV4.AddObject("Products", product);
+            containerV4.AddObject("Categories", category);
+            containerV4.AddLink(category, "Products", product);
+
+            containerV4.SaveChanges(SaveChangesOptions.BatchWithSingleChangeset);
+            
+            //containerV4.Products.ByKey(1).ExpensiveProducts().Execute();
+            //containerV4.Products.ByKey(1).RetireProduct().GetValue();
+
+            //var productV3 = containerV3.Products.First();
+            //var productV4 = containerV4.Orders.OrderBy(p => p.OrderDate.Value).First();
         }
     }
 }
