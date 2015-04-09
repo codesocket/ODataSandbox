@@ -20,7 +20,7 @@ namespace ODataSandbox.Data.Entities
 
         public int? EmployeeID { get; set; }
 
-        public DateTime? OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
         public DateTime? RequiredDate { get; set; }
 

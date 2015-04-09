@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.OData;
 using System.Web.OData.Batch;
+using System.Web.OData.Extensions;
+using System.Web.OData.Routing;
+using Microsoft.OData.Core;
+using Microsoft.OData.Core.UriParser;
 
 namespace ODataSandbox.Data.Controllers
 {
@@ -32,8 +37,25 @@ namespace ODataSandbox.Data.Controllers
             return Ok(entity);
         }
 
+        public async Task<HttpResponseMessage> Post([FromBody]Product entity)
+        {
+            var response = Request.CreateResponse(HttpStatusCode.Created);
+
+            response.Headers.Location = new Uri(Url.CreateODataLink(
+                new EntitySetPathSegment("Products"),
+                new KeyValuePathSegment(ODataUriUtils.ConvertToUriLiteral(1, ODataVersion.V4))));
+
+            return await Task.FromResult(response);
+        }
+
         [HttpPost]
         public async Task<IHttpActionResult> RateProduct([FromODataUri] int key, ODataActionParameters parameters)
+        {
+            return await Task.FromResult(Ok());
+        }
+
+        [AcceptVerbs("POST", "PUT")]
+        public async Task<IHttpActionResult> CreateRef([FromODataUri] int key, string navigationProperty, [FromBody] Uri link)
         {
             return await Task.FromResult(Ok());
         }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 4/7/2015 6:37:54 PM
+// Generation date: 4/8/2015 1:31:47 PM
 namespace ODataSandbox.Data.Entities
 {
     /// <summary>
@@ -1505,11 +1505,13 @@ namespace ODataSandbox.Data.Entities
         /// Create a new Order object.
         /// </summary>
         /// <param name="orderID">Initial value of OrderID.</param>
+        /// <param name="orderDate">Initial value of OrderDate.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        public static Order CreateOrder(int orderID)
+        public static Order CreateOrder(int orderID, global::System.DateTimeOffset orderDate)
         {
             Order order = new Order();
             order.OrderID = orderID;
+            order.OrderDate = orderDate;
             return order;
         }
         /// <summary>
@@ -1586,7 +1588,7 @@ namespace ODataSandbox.Data.Entities
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("OrderDate")]
-        public global::System.Nullable<global::System.DateTimeOffset> OrderDate
+        public global::System.DateTimeOffset OrderDate
         {
             get
             {
@@ -1601,8 +1603,8 @@ namespace ODataSandbox.Data.Entities
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "2.2.0")]
-        private global::System.Nullable<global::System.DateTimeOffset> _OrderDate;
-        partial void OnOrderDateChanging(global::System.Nullable<global::System.DateTimeOffset> value);
+        private global::System.DateTimeOffset _OrderDate;
+        partial void OnOrderDateChanging(global::System.DateTimeOffset value);
         partial void OnOrderDateChanged();
         /// <summary>
         /// There are no comments for Property RequiredDate in the schema.
@@ -4358,7 +4360,7 @@ namespace Default
         <Property Name=""OrderID"" Type=""Edm.Int32"" Nullable=""false"" />
         <Property Name=""CustomerID"" Type=""Edm.String"" />
         <Property Name=""EmployeeID"" Type=""Edm.Int32"" />
-        <Property Name=""OrderDate"" Type=""Edm.DateTimeOffset"" />
+        <Property Name=""OrderDate"" Type=""Edm.DateTimeOffset"" Nullable=""false"" />
         <Property Name=""RequiredDate"" Type=""Edm.DateTimeOffset"" />
         <Property Name=""ShippedDate"" Type=""Edm.DateTimeOffset"" />
         <Property Name=""ShipVia"" Type=""Edm.Int32"" />
@@ -4475,12 +4477,9 @@ namespace Default
         <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
         <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
       </Function>
-      <Function Name=""RateProduct"">
-        <ReturnType Type=""ODataSandbox.Data.Entities.Product"" />
-      </Function>
       <Function Name=""ExpensiveProducts"" IsBound=""true"">
         <Parameter Name=""bindingParameter"" Type=""ODataSandbox.Data.Entities.Product"" />
-        <ReturnType Type=""Collection(ODataSandbox.Data.Entities.Product)"" />
+        <ReturnType Type=""ODataSandbox.Data.Entities.Customer"" />
       </Function>
       <EntityContainer Name=""NorthwindEntities"">
         <EntitySet Name=""Employees"" EntityType=""ODataSandbox.Data.Entities.Employee"">
@@ -4527,7 +4526,6 @@ namespace Default
         <EntitySet Name=""Shippers"" EntityType=""ODataSandbox.Data.Entities.Shipper"">
           <NavigationPropertyBinding Path=""Orders"" Target=""Orders"" />
         </EntitySet>
-        <FunctionImport Name=""RateProduct"" Function=""Default.RateProduct"" IncludeInServiceDocument=""true"" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
@@ -4555,14 +4553,6 @@ namespace Default
             {
                 return global::System.Xml.XmlReader.Create(new global::System.IO.StringReader(edmxToParse));
             }
-        }
-        /// <summary>
-        /// There are no comments for RateProduct in the schema.
-        /// </summary>
-        [global::Microsoft.OData.Client.OriginalNameAttribute("RateProduct")]
-        public global::ODataSandbox.Data.Entities.ProductSingle RateProduct()
-        {
-            return new global::ODataSandbox.Data.Entities.ProductSingle(this.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Product>("", "RateProduct", false));
         }
     }
     /// <summary>
@@ -4600,14 +4590,14 @@ namespace Default
         /// There are no comments for ExpensiveProducts in the schema.
         /// </summary>
         [global::Microsoft.OData.Client.OriginalNameAttribute("ExpensiveProducts")]
-        public static global::Microsoft.OData.Client.DataServiceQuery<global::ODataSandbox.Data.Entities.Product> ExpensiveProducts(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source)
+        public static global::ODataSandbox.Data.Entities.CustomerSingle ExpensiveProducts(this global::Microsoft.OData.Client.DataServiceQuerySingle<global::ODataSandbox.Data.Entities.Product> source)
         {
             if (!source.IsComposable)
             {
                 throw new global::System.NotSupportedException("The previous function is not composable.");
             }
 
-            return source.CreateFunctionQuery<global::ODataSandbox.Data.Entities.Product>("Default.ExpensiveProducts", false);
+            return new global::ODataSandbox.Data.Entities.CustomerSingle(source.CreateFunctionQuerySingle<global::ODataSandbox.Data.Entities.Customer>("Default.ExpensiveProducts", false));
         }
         /// <summary>
         /// There are no comments for RateProduct in the schema.

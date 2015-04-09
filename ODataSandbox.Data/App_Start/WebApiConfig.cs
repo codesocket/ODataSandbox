@@ -47,20 +47,28 @@ namespace ODataSandbox.Data
                 PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
             };
 
-            ODataModelBuilder builder = new ODataConventionModelBuilder();
+            ODataModelBuilder builder = new ODataConventionModelBuilder();            
 
             builder.ContainerName = "NorthwindEntities";
             builder.EntitySet<Employee>("Employees");
             builder.EntitySet<Product>("Products");
             builder.EntitySet<Order_Detail>("Order_Details");
-            builder.EntitySet<Order>("Orders");
+            builder.EntitySet<Order>("Orders");            
             builder.EntitySet<Category>("Categories");
             builder.EntitySet<Customer>("Customers");
             builder.EntitySet<CustomerDemographic>("CustomerDemographics");
             builder.EntitySet<Region>("Regions");
             builder.EntitySet<Supplier>("Suppliers");
             builder.EntitySet<Territory>("Territories");
-            builder.EntitySet<Shipper>("Shippers");
+            builder.EntitySet<Shipper>("Shippers");            
+
+            foreach (var p in builder.EntityType<Order>().Properties)
+            {
+                   if (p.Name == "OrderDate")
+                   {
+
+                   }
+            }
 
             var actionConfig = builder.EntityType<Product>().Action("RateProduct");
             actionConfig.Parameter<int>("rating");
