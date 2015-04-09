@@ -47,6 +47,9 @@ namespace ODataSandbox.Data
                 PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
             };
 
+            TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            config.SetTimeZoneInfo(timeZoneInfo);
+
             ODataModelBuilder builder = new ODataConventionModelBuilder();            
 
             builder.ContainerName = "NorthwindEntities";
