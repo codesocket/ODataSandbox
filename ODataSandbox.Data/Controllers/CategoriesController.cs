@@ -14,19 +14,20 @@ using System.Web.OData.Routing;
 using Microsoft.OData.Core;
 using Microsoft.OData.Core.UriParser;
 
+
 namespace ODataSandbox.Data.Controllers
 {
-    public class ProductsController : ODataController
+    public class CategoriesController : ODataController
     {
         [EnableQuery]
         public IHttpActionResult Get()
         {
-            return Ok(_contxt.Products.AsQueryable());
+            return Ok(_contxt.Categories.AsQueryable());
         }
         [EnableQuery]
         public async Task<IHttpActionResult> Get([FromODataUri]int key)
         {
-            var entity = await this._contxt.Products.FindAsync(key);
+            var entity = await this._contxt.Categories.FindAsync(key);
             if (entity == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -37,44 +38,22 @@ namespace ODataSandbox.Data.Controllers
             return Ok(entity);
         }
 
-        public async Task<HttpResponseMessage> Post([FromBody]Product entity)
+        public async Task<HttpResponseMessage> Post([FromBody]Category entity)
         {
             var response = Request.CreateResponse(HttpStatusCode.Created);
 
             response.Headers.Location = new Uri(Url.CreateODataLink(
-                new EntitySetPathSegment("Products"),
+                new EntitySetPathSegment("Categories"),
                 new KeyValuePathSegment(ODataUriUtils.ConvertToUriLiteral(1, ODataVersion.V4))));
 
             return await Task.FromResult(response);
         }
 
-        [HttpGet]
-        
-        public async Task<IHttpActionResult> RateProduct([FromODataUri] int key, [FromODataUri]int rating, [FromODataUri]DateTimeOffset? dateRated)
-        {
-            
-            return await Task.FromResult(Ok(key));
-        }
 
         [AcceptVerbs("POST", "PUT")]
         public async Task<IHttpActionResult> CreateRef([FromODataUri] int key, string navigationProperty, [FromBody] Uri link)
         {
             return await Task.FromResult(Ok());
-        }
-
-        public async Task Delete([FromODataUri]int key)
-        {
-            var entity = await this._contxt.Products.FindAsync(key);
-            if (entity == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-
-            this._contxt.Products.Remove(entity);
-            if (!this.Request.IsBatchRequest())
-            {
-                await this._contxt.SaveChangesAsync();
-            }
         }
 
         private NorthwindEntities _contxt = new NorthwindEntities();

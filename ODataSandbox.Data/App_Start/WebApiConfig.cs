@@ -73,10 +73,10 @@ namespace ODataSandbox.Data
                    }
             }
 
-            var actionConfig = builder.EntityType<Product>().Action("RateProduct");
+            var actionConfig = builder.EntityType<Product>().Function("RateProduct");
             actionConfig.Parameter<int>("rating");
-            actionConfig.Parameter<DateTime>("dateRated");
-            actionConfig.ReturnsFromEntitySet<Customer>("Customers");
+            actionConfig.Parameter<DateTimeOffset?>("dateRated");
+            actionConfig.Returns<int>();
 
             builder.EntityType<Product>().Function("DiscountProduct").ReturnsCollection<Product>();
             builder.EntityType<Product>().Function("RetireProduct").Returns<Product>();
