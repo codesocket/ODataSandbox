@@ -1,5 +1,6 @@
 ﻿using Default;
 using Microsoft.OData.Client;
+using Microsoft.OData.Edm.Library;
 using ODataSandbox.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,20 @@ namespace ODataSandbox.ConsoleClient
             containerV4.AddObject("Products", product);
             containerV4.AddObject("Categories", category);
             containerV4.AddLink(category, "Products", product);
+
+            var entitySets = containerV4.Format.LoadServiceModel().EntityContainer.Elements
+                .Where(e => e.ContainerElementKind == Microsoft.OData.Edm.EdmContainerElementKind.EntitySet);
+
+            var map = entitySets.ToDictionary(
+                s =>
+                {
+                    var typePropInfo = s.GetType().GetProperty("Type");
+                    var type = typePropInfo.GetValue(s) as EdmCollectionType;
+                    var namePropInfo = type.ElementType.Definition.GetType().GetProperty("Name");
+                    var typeName = namePropInfo.GetValue(type.ElementType.Definition);
+                    return typeName;
+                },
+                s => s.Name);
 
             try
             {
