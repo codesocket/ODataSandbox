@@ -69,7 +69,7 @@ namespace ODataSandbox.Data.Entities
 
         public virtual ICollection<Employee> Employees1 { get; set; }
 
-        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Manager { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 

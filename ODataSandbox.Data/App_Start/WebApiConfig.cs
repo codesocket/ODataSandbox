@@ -44,33 +44,47 @@ namespace ODataSandbox.Data
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
+                PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All
             };
 
             TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             config.SetTimeZoneInfo(timeZoneInfo);
 
-            ODataModelBuilder builder = new ODataConventionModelBuilder();            
+            var builder = new ODataConventionModelBuilder();
 
             builder.ContainerName = "NorthwindEntities";
+
+
+
+
             builder.EntitySet<Employee>("Employees");
+            //builder.EntityType<Employee>().Ignore(e => e.ReportsTo);
+            //builder.EntityType<Employee>().Ignore(e => e.Employees1);
+            //builder.EntityType<Employee>().ComplexProperty(e => e.Manager);
+            builder.EntityType<Employee>().HasKey(e => e.EmployeeID);
+            //builder.EntityType<Employee>().HasKey(e => e.ReportsTo);
+
+            
+                        
+            
+
             builder.EntitySet<Product>("Products");
             builder.EntitySet<Order_Detail>("Order_Details");
-            builder.EntitySet<Order>("Orders");            
+            builder.EntitySet<Order>("Orders");
             builder.EntitySet<Category>("Categories");
             builder.EntitySet<Customer>("Customers");
             builder.EntitySet<CustomerDemographic>("CustomerDemographics");
             builder.EntitySet<Region>("Regions");
             builder.EntitySet<Supplier>("Suppliers");
             builder.EntitySet<Territory>("Territories");
-            builder.EntitySet<Shipper>("Shippers");            
+            builder.EntitySet<Shipper>("Shippers");
 
             foreach (var p in builder.EntityType<Order>().Properties)
             {
-                   if (p.Name == "OrderDate")
-                   {
+                if (p.Name == "OrderDate")
+                {
 
-                   }
+                }
             }
 
             var actionConfig = builder.EntityType<Product>().Function("RateProduct");
@@ -81,6 +95,11 @@ namespace ODataSandbox.Data
             builder.EntityType<Product>().Function("DiscountProduct").ReturnsCollection<Product>();
             builder.EntityType<Product>().Function("RetireProduct").Returns<Product>();
             builder.EntityType<Product>().Function("ExpensiveProducts").Returns<Customer>();
+
+            builder.OnModelCreating = b =>
+                {
+                    b.EntityType<Employee>().HasKey(e => e.EmployeeID);
+                };
 
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",
