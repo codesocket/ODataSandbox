@@ -31,9 +31,9 @@ namespace ODataSandbox.Data.Entities
         [StringLength(25)]
         public string TitleOfCourtesy { get; set; }
 
-        public DateTimeOffset? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public DateTimeOffset? HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         [StringLength(60)]
         public string Address { get; set; }
@@ -69,7 +69,7 @@ namespace ODataSandbox.Data.Entities
 
         public virtual ICollection<Employee> Employees1 { get; set; }
 
-        public virtual Employee Manager { get; set; }
+        public virtual Employee Employee1 { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 

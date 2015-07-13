@@ -10,7 +10,6 @@ namespace ODataSandbox.Data.Entities
         public NorthwindEntities()
             : base("name=NorthwindEntities")
         {
-            Database.SetInitializer<NorthwindEntities>(null);
         }
 
         public virtual DbSet<Category> Categories { get; set; }
@@ -40,10 +39,20 @@ namespace ODataSandbox.Data.Entities
                 .Property(e => e.CustomerID)
                 .IsFixedLength();
 
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Customer)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Employees1)
-                .WithOptional(e => e.Manager)
+                .WithOptional(e => e.Employee1)
                 .HasForeignKey(e => e.ReportsTo);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Employee)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Territories)

@@ -31,9 +31,9 @@ namespace ODataSandbox.DataV3.Entities
         [StringLength(25)]
         public string TitleOfCourtesy { get; set; }
 
-        public DateTimeOffset? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public DateTimeOffset? HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         [StringLength(60)]
         public string Address { get; set; }

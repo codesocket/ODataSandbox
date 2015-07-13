@@ -10,8 +10,8 @@
         <Property Name="FirstName" Type="Edm.String" Nullable="false" />
         <Property Name="Title" Type="Edm.String" />
         <Property Name="TitleOfCourtesy" Type="Edm.String" />
-        <Property Name="BirthDate" Type="Edm.DateTimeOffset" />
-        <Property Name="HireDate" Type="Edm.DateTimeOffset" />
+        <Property Name="BirthDate" Type="Edm.DateTime" />
+        <Property Name="HireDate" Type="Edm.DateTime" />
         <Property Name="Address" Type="Edm.String" />
         <Property Name="City" Type="Edm.String" />
         <Property Name="Region" Type="Edm.String" />
@@ -65,10 +65,10 @@
         </Key>
         <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
         <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
-        <Property Name="EmployeeID" Type="Edm.Int32" />
-        <Property Name="OrderDate" Type="Edm.DateTimeOffset" />
-        <Property Name="RequiredDate" Type="Edm.DateTimeOffset" />
-        <Property Name="ShippedDate" Type="Edm.DateTimeOffset" />
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="OrderDate" Type="Edm.DateTime" />
+        <Property Name="RequiredDate" Type="Edm.DateTime" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" />
         <Property Name="ShipVia" Type="Edm.Int32" />
         <Property Name="Freight" Type="Edm.Decimal" />
         <Property Name="ShipName" Type="Edm.String" />
@@ -238,6 +238,14 @@
       <Association Name="ODataSandbox_DataV3_Entities_Order_Employee_ODataSandbox_DataV3_Entities_Employee_EmployeePartner">
         <End Type="ODataSandbox.DataV3.Entities.Employee" Role="Employee" Multiplicity="0..1" />
         <End Type="ODataSandbox.DataV3.Entities.Order" Role="EmployeePartner" Multiplicity="0..1" />
+        <ReferentialConstraint>
+          <Principal Role="Employee">
+            <PropertyRef Name="EmployeeID" />
+          </Principal>
+          <Dependent Role="EmployeePartner">
+            <PropertyRef Name="EmployeeID" />
+          </Dependent>
+        </ReferentialConstraint>
       </Association>
       <Association Name="ODataSandbox_DataV3_Entities_Order_Order__Details_ODataSandbox_DataV3_Entities_Order__Detail_Order__DetailsPartner">
         <End Type="ODataSandbox.DataV3.Entities.Order_Detail" Role="Order_Details" Multiplicity="*" />

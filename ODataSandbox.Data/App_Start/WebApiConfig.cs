@@ -99,6 +99,8 @@ namespace ODataSandbox.Data
             builder.OnModelCreating = b =>
                 {
                     b.EntityType<Employee>().HasKey(e => e.EmployeeID);
+                    var prop = b.EntityType<Order>().Properties.First(p => p.Name == "EmployeeID");
+                    
                 };
 
             config.MapODataServiceRoute(

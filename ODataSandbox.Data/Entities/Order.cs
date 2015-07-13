@@ -15,12 +15,13 @@ namespace ODataSandbox.Data.Entities
 
         public int OrderID { get; set; }
 
+        [Required]
         [StringLength(5)]
         public string CustomerID { get; set; }
 
-        public int? EmployeeID { get; set; }
+        public int EmployeeID { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         public DateTime? RequiredDate { get; set; }
 

@@ -39,10 +39,20 @@ namespace ODataSandbox.DataV3.Entities
                 .Property(e => e.CustomerID)
                 .IsFixedLength();
 
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Customer)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Employees1)
                 .WithOptional(e => e.Employee1)
                 .HasForeignKey(e => e.ReportsTo);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Employee)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Territories)
